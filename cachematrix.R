@@ -1,15 +1,51 @@
-## Put comments here that give an overall description of what your
-## functions do
+###############################Function Definitions############################
 
-## Write a short comment describing this function
+# This function makeCacheMatrix accepts a matrix as a parameter
+# and contains list of four functions
+#### 1. seti() Sets the value of matrix
+#### 2. geti() gets the value of matrix
+#### 3. setinvi() gets the value of inverse matrix
+#### 4. getinvi() gets the value of inverse matrix
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  inverval <- NULL
+  #Setting the value of matrix into cache
+  seti <- function(y) {
+    x <<- y
+    inverval <<- NULL
+  }
+  
+  #Getting the value of matrix from cache
+  geti <- function() x
+  
+  #Setting the value of inverse matrix into cache
+  setinvi <- function(invset) inverval <<- invset
+  
+  #Getting the value of inverse matrix into cache
+  getinvi <- function() inverval
+  
+  #Creating final output as list of functions
+  list(seti = seti, geti = geti,
+       setinvi = setinvi,
+       getinvi = getinvi)
 }
 
 
-## Write a short comment describing this function
+# This function cacheSolve checks if the inverse of the matrix already
+# existing, then returns the data from Cache else compute using "solve" 
+# function and cache it using the function defined in the makeCacheMatrix()
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  inverval <- x$getinvi()
+  #Check if the inverse of matrix exists, then return the cache data
+  if(!is.null(inverval)) {
+    message("getting cached data")
+    return(inverval)
+  }
+  
+  #If Inverse doesn't exist in cache then computing and storing in cache
+  data <- x$geti()
+  inverval <- solve(data, ...)
+  x$setinvi(inverval)
+  inverval
 }
