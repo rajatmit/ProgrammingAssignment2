@@ -33,19 +33,22 @@ makeCacheMatrix <- function(x = matrix()) {
 
 # This function cacheSolve checks if the inverse of the matrix already
 # existing, then returns the data from Cache else compute using "solve" 
-# function and cache it using the function defined in the makeCacheMatrix()
+# function and cache using function setinvi() defined in the makeCacheMatrix()
 
 cacheSolve <- function(x, ...) {
   inverval <- x$getinvi()
-  #Check if the inverse of matrix exists, then return the cache data
+  #Check if the matrix-inverse exists using getinvi(), then return cached data
   if(!is.null(inverval)) {
     message("getting cached data")
     return(inverval)
   }
   
-  #If Inverse doesn't exist in cache then computing and storing in cache
+  #If Inverse doesn't exist in cache then computing and storing in cache using
+  # setinvi()
   data <- x$geti()
   inverval <- solve(data, ...)
   x$setinvi(inverval)
   inverval
 }
+
+#################################Usage##########################################
