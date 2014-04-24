@@ -1,6 +1,6 @@
 ###############################Function Definitions############################
 
-# This function makeCacheMatrix accepts a matrix as a parameter
+# This function makeCacheMatrix accepts a invertible matrix as a parameter
 # and contains list of four functions
 #### 1. seti() Sets the value of matrix
 #### 2. geti() gets the value of matrix
